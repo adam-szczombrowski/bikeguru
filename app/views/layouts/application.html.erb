@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bike</title>
+    <%= csrf_meta_tags %>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNK0L11Aft9I8juRTiaRQl-RKKYskMnk4"></script>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+<%= render 'layouts/react_hot_assets' %>
+    <%= yield %>
+  </body>
+</html>
