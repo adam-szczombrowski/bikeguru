@@ -1,8 +1,14 @@
 import RWR from 'react-webpack-rails';
 RWR.run();
 
-import HelloWorld from './components/hello-world';
-RWR.registerComponent('HelloWorld', HelloWorld);
+import BikeMap from './components/bike-map';
+import Map from './components/map';
+import Demo from './components/demo';
+
+
+RWR.registerComponent('BikeMap', BikeMap);
+RWR.registerComponent('Map', Map);
+RWR.registerComponent('Demo', Demo);
 
 if (module.hot) {
   module.hot.accept();

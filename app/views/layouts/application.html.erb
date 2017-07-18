@@ -6,11 +6,14 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNK0L11Aft9I8juRTiaRQl-RKKYskMnk4"></script>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-<%= render 'layouts/react_hot_assets' %>
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/react_hot_assets' %>
+    <%= render 'layouts/flash_messages' %>
     <%= yield %>
   </body>
 </html>

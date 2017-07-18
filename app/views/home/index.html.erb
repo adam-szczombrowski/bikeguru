@@ -1,3 +1,7 @@
-<div style="height:500px; width:500px;"> <!-- ommiting the height and width will not show the map -->
-     <div id="map" style="height:500px; width:500px;"></div>
+<%= csrf_meta_tags %>
+
+<div class="row">
+  <div class="offset-md-1 col-md-10 text-center">
+    <%= react_component('Demo', { cities: @cities, stations: @stations, favorite_stations: @favorite_stations, current_user: @current_user } ) %>
+  </div>
 </div>

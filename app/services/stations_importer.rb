@@ -1,26 +1,31 @@
 class StationsImporter
-  def initialize(station:)
-    @station = station
-  end
-
   def import
-    data = get_data
-    create_stations(data)
+    City.all.each do |city|
+      data, href = get_data(city.href)
+      create_stations(data, href, city.id)
+    end
   end
 
   private
-  attr_reader :station
 
-  def get_data
-    uri = URI("https://api.citybik.es/v2/networks/#{station}")
-    JSON.parse(Net::HTTP.get(uri))["network"]["stations"]
+  def get_data(city_href)
+    url = "https://api.citybik.es#{city_href}"
+    uri = URI(url)
+    [JSON.parse(Net::HTTP.get(uri))["network"]["stations"], url]
   rescue Net::ReadTimeout
     false
   end
 
-  def create_stations(data)
+  def create_stations(data, href, city_id)
     data.each do |d|
-      Station.find_or_create_by(name: d["name"], long: d["longitude"], lat: d["latitude"])
+      Station.create(
+        name: d["name"],
+        longitude: d["longitude"],
+        latitude: d["latitude"],
+        free_bikes: d["free_bikes"],
+        href: href,
+        city_id: city_id
+      )
     end
   end
 end

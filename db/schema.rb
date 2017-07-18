@@ -10,15 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405072455) do
+ActiveRecord::Schema.define(version: 20170420072458) do
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "href"
+    t.float    "lat"
+    t.float    "long"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "stations", force: :cascade do |t|
     t.string   "name"
-    t.float    "lat"
-    t.float    "long"
-    t.integer  "bikes"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "free_bikes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "href"
+    t.string   "uuid"
+    t.integer  "city_id"
+  end
+
+  create_table "user_stations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "station_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["station_id"], name: "index_user_stations_on_station_id"
+    t.index ["user_id"], name: "index_user_stations_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
